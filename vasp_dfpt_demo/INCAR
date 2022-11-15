@@ -1,0 +1,14 @@
+ADDGRID = True
+EDIFF = 1e-07
+ENCUT = 650
+IALGO = 38
+IBRION = 8
+ISMEAR = 1
+KSPACING = 0.3
+LCHARG = False
+LREAL = False
+LWAVE = False
+NSW = 1
+PREC = Accurate
+SIGMA = 0.22
+SYSTEM = Fcc

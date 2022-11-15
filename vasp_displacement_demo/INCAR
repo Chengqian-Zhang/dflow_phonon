@@ -1,0 +1,42 @@
+SYSTEM = opt
+
+#Initialize
+ISTART = 0
+ICHARG = 2
+#SYMPREC = 1e-5
+ISYM = 0
+PREC = Accurate
+ALGO = Normal # or fast
+#ISPIN = 2
+#MAGMOM =  4 4 6*0
+
+#Electronic degrees
+ENCUT = 500
+NELM    =  100 
+NELMIN  =  6
+#NELMDL  =  -5  
+EDIFF = 1e-6  
+
+#iron:1 0.2 non-iron:0 0.05###################
+#ISMEAR = 0 ; SIGMA = 0.05
+ISMEAR = 1 ; SIGMA = 0.2
+
+#Ionic parameters
+IBRION = -1  # 2
+NSW = 0
+#ISIF = 3 # 2 4 3
+#POTIM = 0.1
+#EDIFFG = -0.01  # 1e-4
+
+#K points and pressure
+KSPACING = 1.0
+#PSTRESS = 3000
+
+#File to write
+LCHARG=F
+LWAVE=F
+
+#Make it faster
+NPAR = 8
+KGAMMA = False
+LREAL=A
