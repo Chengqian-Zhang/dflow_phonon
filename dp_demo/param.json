@@ -1,0 +1,14 @@
+{
+    "interaction": {
+        "type": "dp",
+        "model":         "frozen_model.pb",
+        "type_map":     {"Mg":0,"Al": 1,"Cu":2}
+    },
+    "properties": {
+         "type":         "phonon",
+	 "band_path": "0.5000   0.5000   0.5000  0.0000   0.0000   0.0000 0.5000   0.0000   0.5000 0.5000   0.2500   0.7500",
+	 "supercell_matrix":[2,2,2],
+	 "primitive":true
+    }
+}
+
