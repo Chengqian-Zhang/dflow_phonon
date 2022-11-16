@@ -10,3 +10,6 @@ Fill in your Bohrium **username** and **password** in the **run.py** file.(line 
 
 ## Step3
 nohup python3 run.py &
+
+## workflow
+You can track the progress of the task at https://workflow.dp.tech/
