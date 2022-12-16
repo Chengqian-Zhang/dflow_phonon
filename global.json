@@ -1,0 +1,12 @@
+{
+    "work_dir":"work_dir", #这里只能是work_dir,因为代码里有个bug我还没修...
+    "email": "",
+    "password": "",
+    "program_id": ,
+    "phonopy_image_name":"registry.dp.tech/dptech/prod-11461/phonopy:v1.2",
+    "vasp_image_name":"registry.dp.tech/dptech/vasp:5.4.4-dflow",
+    "abacus_image_name":"registry.dp.tech/dptech/prod-11461/abacus:phonopy",
+    "phonolammps_image_name":"registry.dp.tech/dptech/prod-11461/phonopy:v1.2",
+    "cpu_scass_type":"c16_m32_cpu",
+    "gpu_scass_type":"c4_m15_1 * NVIDIA T4"
+}

@@ -4,7 +4,6 @@ s3_config["endpoint"] = "xxx"
 config["k8s_api_server"] = "xxx"
 config["token"] = "xxx"
 
-import json,pathlib
 from typing import List
 from dflow import (
     Workflow,
@@ -28,7 +27,7 @@ from dflow.python import (
 )
 import time
 
-import subprocess, os, shutil, glob,dpdata
+import subprocess, os, shutil, glob,dpdata,pathlib
 from pathlib import Path
 from typing import List
 from monty.serialization import loadfn
@@ -66,10 +65,6 @@ class PhononMakeVASP(OP):
             op_in: OPIO,
     ) -> OPIO:
         cwd = os.getcwd()
-        for i in range(100):
-            print("cwd",cwd)
-        for i in range(100):
-            print("listdir",os.listdir())
 
         os.chdir(op_in["input"])
         work_d = os.getcwd()
@@ -166,9 +161,9 @@ class PhononMakeVASP(OP):
         })
         return op_out
 
-class VASPDFPT(OP):
+class VASP(OP):
     """
-    class for VASP DFPT calculation
+    class for VASP calculation
     """
     def __init__(self,infomode=1):
         self.infomode = infomode
@@ -197,7 +192,7 @@ class VASPDFPT(OP):
         })
         return op_out
 
-class PhononPostVASPDFPT(OP):
+class PhononPostVASP(OP):
     """
     class for analyse calculation results
     """
@@ -250,17 +245,23 @@ class PhononPostVASPDFPT(OP):
                 print('vasprun.xml No such file')
 
         elif(approach == "displacement"):
-            os.chdir(os.path.join(cwdd,"work_dir"))
-            shutil.copyfile("task.000000/band.conf","band.conf")
-            shutil.copyfile("task.000000/phonopy_disp.yaml","phonopy_disp.yaml")
-            os.system('phonopy -f task.0*/vasprun.xml')
+            try:
+                os.chdir(os.path.join(cwdd,"work_dir"))
+                shutil.copyfile("task.000000/band.conf","band.conf")
+                shutil.copyfile("task.000000/phonopy_disp.yaml","phonopy_disp.yaml")
+                os.system('phonopy -f task.0*/vasprun.xml')
+            except:
+                os.system('phonopy -f vasprun.xml')
             if os.path.exists("FORCE_SETS"):
                 print('FORCE_SETS is created')
             else:
                 print('FORCE_SETS can not be created')
             os.system('phonopy --dim="%s %s %s" -c POSCAR-unitcell band.conf'%(supercell_matrix[0],supercell_matrix[1],supercell_matrix[2]))
             os.system('phonopy-bandplot --gnuplot band.yaml > band.dat')
-            shutil.copyfile("band.dat","task.000000/band.dat")
+            try:
+                shutil.copyfile("band.dat","task.000000/band.dat")
+            except:
+                pass
 
         op_out = OPIO({
             "output_post": op_in["input_post"]

@@ -73,10 +73,6 @@ class PhononMakeDP(OP):
             op_in: OPIO,
     ) -> OPIO:
         cwd = os.getcwd()
-        for i in range(100):
-            print("cwd",cwd)
-        for i in range(100):
-            print("listdir",os.listdir())
 
         os.chdir(op_in["input"])
         work_d = os.getcwd()
@@ -159,7 +155,7 @@ class PhononMakeDP(OP):
 
 class DP(OP):
     """
-    class for VASP DFPT calculation
+    class for calculation
     """
     def __init__(self,infomode=1):
         self.infomode = infomode
@@ -184,8 +180,6 @@ class DP(OP):
         supercell_matrix = parameter['supercell_matrix']
 
         os.chdir(os.path.join(op_in["input_dp"],"task.000000"))
-        for i in range(100):
-            print(os.listdir())
         cmd = "phonolammps in.lammps -c POSCAR --dim %s %s %s "%(supercell_matrix[0],supercell_matrix[1],supercell_matrix[2])
         subprocess.call(cmd, shell=True)
         os.chdir(cwd)
